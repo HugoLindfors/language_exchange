@@ -55,7 +55,7 @@
     <p>NEW USER</p>
     <button @click="AddNewUser()" class="new-user-button">+</button><input type="text" placeholder="Your name" v-model="newUsername" class="new-user"><input type="text" placeholder="Your native language, if you have multiple, seperate them by commas like this: »English, French«" v-model="newNativeLanguages" class="new-user">
     <p>ADD NEW LANGUAGE TO USER</p>
-          <input type="text" v-model="newLanguageName" class="new-user-language" placeholder="">
+          <input type="text" v-model="newLanguageName" class="new-user-language" placeholder="Your language">
           <select v-model="newLanguageLevel" class="new-user-language">
             <option>Native</option>
             <option>Proficient</option>
