@@ -74,7 +74,7 @@
 
   export default defineComponent({
     props: {
-
+      
     },
     data() { //VARIABLER
       return {

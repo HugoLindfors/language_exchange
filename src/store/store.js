@@ -2,7 +2,6 @@ import { reactive } from "vue";
 
 export let store = reactive({
     users: [
-        /*
         {
             name: `Hugo Lindfors`,
             score: -1,
@@ -145,6 +144,5 @@ export let store = reactive({
                 },
             ]
         },
-        */
     ]
 })
