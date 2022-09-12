@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import './assets/main.css'
-
+import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 // FIREBASE: //////////
 import { initializeApp } from "firebase/app";
 
@@ -17,9 +17,15 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 ////////////////////////
-
 const app = createApp(App)
 
-app.use(router)
+app.use(router);
+
+async function getCities(db: any) {
+  const citiesCol = collection(db, 'cities');
+  const citySnapshot = await getDocs(citiesCol);
+  const cityList = citySnapshot.docs.map(doc => doc.data());
+  return cityList;
+}
 
 app.mount('#app')
