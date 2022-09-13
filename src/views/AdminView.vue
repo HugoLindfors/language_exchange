@@ -1,4 +1,4 @@
-<script setup lang="js">
+<script setup>
 
 </script>
 
@@ -37,12 +37,12 @@
           </span>
         </td>
         <td>
-          <span v-if="user.score >0 || onlyShowPositiveScores === false" v-for="language in user.languages.filter((language: any) => language.level === 'Native')"> <!--MODERSMÅL-->
+          <span v-if="user.score >0 || onlyShowPositiveScores === false" v-for="language in user.languages.filter((language) => language.level === 'Native')"> <!--MODERSMÅL-->
             {{language.name}}
           </span>
         </td>
         <td>
-          <span v-if="user.score >0 || onlyShowPositiveScores === false" v-for="language in user.languages.filter((language: any) => language.level !== 'Native')"> <!--ANDRA SPRÅK-->
+          <span v-if="user.score >0 || onlyShowPositiveScores === false" v-for="language in user.languages.filter((language) => language.level !== 'Native')"> <!--ANDRA SPRÅK-->
             <span @click="user.languages.splice(user.languages.indexOf(language), 1)" v-if="hideNonNativeLanguages === false">{{language.name}} ({{language.level}})</span>
           </span>
         </td>
@@ -68,7 +68,7 @@
   </main>
 </template>
 
-<script lang="js">
+<script>
   import { store } from "../store/store.js";
   import { defineComponent } from "vue";
 
@@ -98,15 +98,15 @@
     methods: { //METODER
       Search() { //SÖKMETODEN
         console.log(this.JSONString);
-        let filter: string = this.searchbarInput.toLocaleUpperCase();
+        let filter = this.searchbarInput.toLocaleUpperCase();
         console.log(filter);
 
-        let table: any = document.getElementById("table");
+        let table = document.getElementById("table");
         let tr = document.getElementsByTagName("tr"); //TR ÄR EN ARRAY
-        for (let i: number = 1; i < tr.length; i++) {
-          for (let j: number = 0; j < 4; j++) {
-            let td: any = tr[i].getElementsByTagName("td")[j];
-            let txtValue: string = td.textContent || td.innerText;
+        for (let i = 1; i < tr.length; i++) {
+          for (let j = 0; j < 4; j++) {
+            let td = tr[i].getElementsByTagName("td")[j];
+            let txtValue = td.textContent || td.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
               tr[i].style.display = "";
             } else {
@@ -119,13 +119,13 @@
       SortByName() {
         if (this.sortedByName === false) { //IF !SORTED => SORT
           this.copyOfusers = [...store.users];
-          this.store.users.sort((a: any, b: any) => a.name.localeCompare(b.name))
+          this.store.users.sort((a, b) => a.name.localeCompare(b.name))
           this.sortedByName = true;
           this.sortedbyScore = this.reverseSortedByScore = false;
         }
 
         else if (this.sortedByName === true && this.reverseSortedByName === false) { // ELSE IF SORTED && !REVERSED => REVERSE
-          this.store.users.sort((a: any, b: any) => b.name.localeCompare(a.name))
+          this.store.users.sort((a, b) => b.name.localeCompare(a.name))
           this.reverseSortedByName = true;
           this.sortedbyScore = this.reverseSortedByScore = false;
         }
@@ -140,13 +140,13 @@
       SortByScore() {
         if (this.sortedbyScore === false) { //IF !SORTED => SORT
           this.copyOfusers = [...store.users];
-          this.store.users.sort((a: any, b: any) => b.score - a.score)
+          this.store.users.sort((a, b) => b.score - a.score)
           this.sortedbyScore = true;
           this.sortedByName = this.reverseSortedByName = false;
         }
 
         else if (this.sortedbyScore === true && this.reverseSortedByScore === false) { // ELSE IF SORTED && !REVERSED => REVERSE
-          this.store.users.sort((a: any, b: any) => a.score - b.score)
+          this.store.users.sort((a, b) => a.score - b.score)
           this.reverseSortedByScore = true;
           this.sortedByName = this.reverseSortedByName = false;
         }
@@ -179,7 +179,7 @@
       },
 
       AddNewUser() {
-        let nativeLanguageArray: string[] = this.newNativeLanguages.split(`, `);
+        let nativeLanguageArray = this.newNativeLanguages.split(`, `);
 
         if ((this.newUsername === `` || null) || (this.newNativeLanguages === ``|| null)) {
           alert(`ERROR! NO USERNAME, OR LANGUAGE ASSIGNED`);
@@ -196,7 +196,7 @@
           })
         }
 
-        for (let i: number = 0; i < nativeLanguageArray.length; i++) {
+        for (let i = 0; i < nativeLanguageArray.length; i++) {
           this.store.users[this.store.users.length - 1].languages.push({
             name: nativeLanguageArray[i],
             level: `Native`
@@ -204,7 +204,7 @@
         }
       },
 
-      AddNewLanguage(user: any) {
+      AddNewLanguage(user) {
         if ((this.newLanguageName === `` || null) || (this.newLanguageLevel === ``|| null)) {
           alert(`ERROR! NO LANGUAGE, OR LEVEL ASSIGNED`);
           location.reload();
@@ -218,7 +218,7 @@
         }
       },
 
-      DeleteUser(user: any) {
+      DeleteUser(user) {
         store.users.splice(store.users.indexOf(user), 1);
       }
     },
