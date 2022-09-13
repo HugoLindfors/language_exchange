@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="js">
 
 </script>
 
@@ -68,7 +68,7 @@
   </main>
 </template>
 
-<script lang="ts">
+<script lang="js">
   import { store } from "../store/store.js";
   import { defineComponent } from "vue";
 
